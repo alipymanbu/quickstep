@@ -1,121 +1,25 @@
 # Quickstep
 
-[![Travis Widget]][Travis]
+本仓库是「Quickstep」的安卓版本获取入口，附使用资料索引。
 
-[Travis]: https://travis-ci.org/UWQuickstep/quickstep
-[Travis Widget]: https://travis-ci.org/UWQuickstep/quickstep.svg?branch=master
+## 安装文件资源（夸克网盘）
 
-## What is Quickstep?
-Quickstep is high-performance database engine designed to exploit the full potential of hardware that is packed in modern computing boxes (servers and laptops). This version  targets single-node in-memory environments. If your data spills overs the memory limit Quickstep will still work, so you don't have to obsessively worry about the in-memory part. Also, if your working set fits in memory then Quickstep will transparently and automatically figure that out, and cache that hot set to  deliver in-memory performance.
+> **Quickstep 安装文件资源（夸克网盘）**：[https://pan.quark.cn/s/056687f7cf01](https://pan.quark.cn/s/056687f7cf01)
 
-## Why Quickstep?
-Did you know that the hardware that you have in your laptop was spread across a small cluster just a decade ago? (PS: Hopefully you are not using a very old laptop!) If you look at a high-end server box, then that packs compute and storage power that was a full rack about 5 years ago! And, the way hardware technology is going, that box is going to become even more powerful in the future. In fact, it is likely that the computing power in each box is going to grow faster than other hardware components (e.g. networking) in data centers. So, if you care about performance and/or total operating costs, paying attention to single box performance is likely to be super important in the long run.
+## 官方项目
 
-In other words there is a small data center in an individual compute boxes today! Quickstep aims to allow you to fully exploit the potential of that data center that is hidden in each individual box today. We call this the **scaling-in approach**, and it complements a scaling-out approach. But without scaling-in, you are overpaying (by a lot!) when you run your data service.
+- 上游项目：[UWQuickstep/quickstep](https://github.com/UWQuickstep/quickstep)
 
-## What are the key ingredients?
+## 更多资料
 
-Modern computing boxes contain a large number of computing cores and large main memory configuration. Quickstep allows you to fully exploit these hardware resources using novel data processing, data storage, and query processing methods that include:
+- [下载与安装教程](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/Quickstep/%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.md)
+- [已停止运行怎么办](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/Quickstep/%E5%B7%B2%E5%81%9C%E6%AD%A2%E8%BF%90%E8%A1%8C%E6%80%8E%E4%B9%88%E5%8A%9E.md)
+- [手势导航设置](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/Quickstep/%E6%89%8B%E5%8A%BF%E5%AF%BC%E8%88%AA%E8%AE%BE%E7%BD%AE.md)
+- [是什么应用可以卸载吗](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/Quickstep/%E6%98%AF%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E5%8F%AF%E4%BB%A5%E5%8D%B8%E8%BD%BD%E5%90%97.md)
+- [更换默认桌面方法](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/Quickstep/%E6%9B%B4%E6%8D%A2%E9%BB%98%E8%AE%A4%E6%A1%8C%E9%9D%A2%E6%96%B9%E6%B3%95.md)
+- [桌面空白怎么应急恢复](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/Quickstep/%E6%A1%8C%E9%9D%A2%E7%A9%BA%E7%99%BD%E6%80%8E%E4%B9%88%E5%BA%94%E6%80%A5%E6%81%A2%E5%A4%8D.md)
+- [全部软件目录](https://github.com/alipymanbu/Android/blob/master/%E5%85%A8%E9%83%A8%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95.md)
 
-1. A unique **decoupling of data-flow from control-flow** for query execution that allows for unlimited intra and inter-query parallelism. Thus, using all the processing core effectively.
+---
 
-2. A **template meta-programming** framework that provides fast vectorized query execution. Thus, using each processor cycle very efficiently.
-
-3. A **hybrid data storage** architecture that includes columnar and row-store. Yes, this may surprise some of you, but sometimes a row-store beats a column-store!
-
-And, it is **open source!**
-
-## Giving it a spin
-
-1. Checkout the code: ```git clone https://github.com/UWQuickstep/quickstep.git```
-2. Then, go to the code directory: ```cd quickstep```
-3. Initialize the dependencies: ```git submodule init```
-4. Checkout the dependencies: ```git submodule update```
-5. Download additional third-party dependencies and apply patches:<br/>
-```cd third_party && ./download_and_patch_prerequisites.sh && cd ../```
-6. Go into the build directory: ```cd build```
-7. Create the Makefile: ```cmake -D CMAKE_BUILD_TYPE=Release ..```
-8. Build: ```make -j4```. Note you may replace the 4 with the number of cores
-   on your machine.
-9. Start quickstep: ```./quickstep_cli_shell --initialize_db=true```. You can
-   now fire SQL queries. To quit, you can type in ```quit;``` Your data is
-   stored in the directory ```qsstor```. Note the next time you start Quickstep,
-   you can omit the ``` --initialize_db``` flag (as the database has already
-   been initialized), and simply start Quickstep as: ```./quickstep_cli_shell```.
-   There are also a number of optional flags that you can specify, and to see
-   the full list, you can type in: ```./quickstep_cli_shell --help```
-10. Next let us load some data and fire some queries. A few points to note:
-The SQL surface of Quickstep is small (it will grow over time). The
-traditional SQL CREATE TABLE and SELECT statements work. The data types
-that are supported include INTEGER, FLOAT, DOUBLE, VARCHAR, CHAR, DATE,
-and DATETIME. Quickstep also does not have support for NULLS or keys (yet).
-Let us create two tables by typing into the Quickstep shell (which you opened
-in the step above), the following SQL command:
-
-```
-CREATE TABLE Weather (cid INTEGER, recordDate DATE, highTemperature FLOAT, lowTemperature FLOAT);
-```
-
-and then,
-
-```
-CREATE TABLE City (cid Integer, name VARCHAR(80), state CHAR(2));
-```
-
-10. Next, let us insert some tuples in these two tables.
-    ```
-    INSERT INTO City VALUES (1, 'Madison', 'WI');
-    INSERT INTO City VALUES (2, 'Palo Alto', 'CA');
-    INSERT INTO Weather VALUES (1, '2015-11-1', 50, 30);
-    INSERT INTO Weather VALUES (1, '2015-11-2', 51, 32);
-    INSERT INTO Weather VALUES (2, '2015-11-1', 60, 50);
-    ```
-
-11. We can now issue SQL queries such as:
-  a. Find all weather records for California:
-  ```
-  SELECT * FROM WEATHER W, City C WHERE C.cid = W.cid AND C.state = 'CA';
-  ```
-
-  b. Find the min and max temperature for each city, printing the ```cid```:
-  ```
-  SELECT cid, MIN(lowTemperature), MAX(highTemperature) FROM Weather GROUP BY cid;
-  ```
-
-  c. Find the min and max temperature for each city using a nested query, and
-     printing thie city name:
-  ```
-  SELECT * FROM City C, (SELECT cid, MIN(lowTemperature), MAX(highTemperature) FROM Weather GROUP BY cid) AS T WHERE C.cid = T.cid;
-  ```
-
-12. Quickstep also supports a COPY TABLE command. If you want to try that, then
-    from a separate shell file type in the following:
-
-    ```
-    echo "3|2015-11-3|49|29" > /tmp/tmp.tbl
-    echo "3|2015-11-4|48|28" >> /tmp/tmp.tbl
-    echo "3|2015-11-5|47|27" >> /tmp/tmp.tbl
-    ```
-
-    Then, load this new data by typing the following SQL in the Quickstep shell:
-
-    ```
-    COPY Weather FROM '/tmp/tmp.tbl' WITH (DELIMITER '|');
-    ```
-
-    Now, you have loaded three more tuples into the Weather table, and you can
-    fire the SQL queries above again against this modified database.
-
-    Remember, to quit Quickstep, you can type in ```quit;``` into the Quickstep
-    shell.
-
-
-## Additional pointers
-
-1. For other build options, see the more comprehensive [build guide](BUILDING.md).
-2. To get started as a developer, you should start with the [code organization guide](DEV_README.md).
-
-
-## Licensing
-
-Quickstep is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
+> 本仓库由上游项目 fork 而来，原始说明见[上游仓库](https://github.com/UWQuickstep/quickstep)。
